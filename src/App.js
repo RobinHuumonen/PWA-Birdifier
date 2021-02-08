@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import { PageWrap } from './AppStyles';
+import Header from './components/header/Header';
+import Content from './components/content/Content';
 
 function App() {
 
@@ -8,9 +10,10 @@ function App() {
   }, []);
 
   return (
-    <div className="site-wrapper">
-      <h1>Heello</h1>
-    </div>
+    <PageWrap>
+      <Header/>
+      <Content/>
+    </PageWrap>
   );
 }
 
