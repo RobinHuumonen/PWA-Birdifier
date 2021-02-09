@@ -6,7 +6,7 @@ import Content from './components/content/Content';
 function App() {
 
   useEffect(() => {
-    document.title = "PWA-Birdifier"
+    document.title = "PWA Birdifier"
   }, []);
 
   return (

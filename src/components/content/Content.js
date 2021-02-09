@@ -2,11 +2,16 @@ import React from 'react';
 import { ContentWrap } from './ContentStyles';
 
 function Content() {
-
   return (
     <ContentWrap>
-      <h3>Classify bird species with TF.js!</h3>
+      <div className="quideResults">
+      </div>
       <div className="selectImage">
+      </div>
+      <div class="btn-group">
+        <button>Select file</button>
+        <button>Take photo</button>
+        <button>Classify</button>
       </div>
     </ContentWrap>
   );
