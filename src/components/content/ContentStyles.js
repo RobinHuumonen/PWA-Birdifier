@@ -18,15 +18,21 @@ export const ContentWrap = styled.div`
 
   .quideResults {
     background-color: #273469;    
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
   
 
   .selectImage {
-    min-height: 22rem;
+    display: flex;
+  }
+
+  .selectImage img {
+    height: auto;
+    width: 100%;
+    align-self: flex-end;
   }
 
   .btn-group {
