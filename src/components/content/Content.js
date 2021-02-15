@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PieChart, Pie, Tooltip } from 'recharts';
+import { PieChart, Pie, Tooltip,  } from 'recharts';
 import { ContentWrap } from './ContentStyles';
 
 function Content() {

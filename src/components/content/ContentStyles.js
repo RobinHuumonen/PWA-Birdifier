@@ -18,6 +18,10 @@ export const ContentWrap = styled.div`
 
   .quideResults {
     background-color: #273469;    
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   }
   
 
