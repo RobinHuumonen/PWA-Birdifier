@@ -15,16 +15,7 @@ export const ContentWrap = styled.div`
     width: 40rem;
     margin:0 auto;
   }
-
-  .quideResults {
-    background-color: #273469;    
-    text-align: center;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
   
-
   .selectImage {
     display: flex;
   }
