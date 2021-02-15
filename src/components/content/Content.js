@@ -11,7 +11,15 @@ function Content() {
   ]); 
   return (
     <ContentWrap>
-      <div className="quideResults">
+      <div className="selectImage">
+       <img src={preloadedImg}></img>
+      </div>
+      <div className="btn-group">
+        <button>Select file</button>
+        <button>Take photo</button>
+        <button>Classify</button>
+      </div>
+{/*       <div className="quideResults">
         <PieChart width={400} height={400}>
           <Pie
             dataKey="value"
@@ -25,15 +33,7 @@ function Content() {
           />
           <Tooltip />
         </PieChart>
-      </div>
-      <div className="selectImage">
-       <img src={preloadedImg}></img>
-      </div>
-      <div className="btn-group">
-        <button>Select file</button>
-        <button>Take photo</button>
-        <button>Classify</button>
-      </div>
+      </div> */}
     </ContentWrap>
   );
 }

@@ -11,5 +11,4 @@ export const PageWrap = styled.div`
 
   display: flex;
   flex-direction: column;
-
 `;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const ContentWrap = styled.div`
-  display: flex;
   flex: 1;
+  display: flex;
   flex-direction: column;
   min-height: 100%;
   width: 100%;
