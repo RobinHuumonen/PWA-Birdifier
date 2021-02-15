@@ -17,9 +17,9 @@ export const ContentWrap = styled.div`
   }
 
   .quideResults {
-    min-height: 15rem;
-    background-color: #273469;
+    background-color: #273469;    
   }
+  
 
   .selectImage {
     min-height: 22rem;
@@ -31,11 +31,11 @@ export const ContentWrap = styled.div`
 
   .btn-group button {
     width: 33.3%;
-    background-color: #E4D9FF;
+    background-color: #8884d8;
     border: 1px solid #FAFAFF;
     padding: 15px 24px;
     cursor: pointer;
-    color: #273469;  
+    color: #FAFAFF;  
     font-family: inherit;
   }
 
