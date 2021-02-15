@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 export const HeaderWrap = styled.div`
-  width: 100%;
   padding: 1.4rem 0;
-  background-color: red;
-  
+  align-self: center;
+
+  @media(min-width: 1024px) {
+    align-self: auto;
+  }
+
   h1 {
     margin-left: 1.4rem;
+    font-size: 2rem;
     
   }
 `;

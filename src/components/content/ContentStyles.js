@@ -1,50 +1,45 @@
 import styled from 'styled-components';
 
 export const ContentWrap = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  background-color: gray;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
+  min-height: 100%;
+  width: 100%;
 
-  @media(min-width: 40rem) {
+  div {
+    flex: 1;
+  }
+
+  @media(min-width: 1024px) {
     width: 40rem;
     margin:0 auto;
   }
 
-  div {
-    align-items: center;
-    display: flex;
-  }
-
   .quideResults {
-    height: 8rem;
-    background-color: blue;
+    min-height: 15rem;
+    background-color: #273469;
   }
 
   .selectImage {
-    height: 22rem;
-    background-color: lightcoral;
+    min-height: 22rem;
   }
 
   .btn-group {
-    background-color: lightpink;
+    flex-grow: 0;
   }
 
   .btn-group button {
     width: 33.3%;
-    background-color: #4CAF50; /* Green background */
-    border: 1px solid green; /* Green border */
-    color: white; /* White text */
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    float: left; /* Float the buttons side by side */
+    background-color: #E4D9FF;
+    border: 1px solid #FAFAFF;
+    padding: 15px 24px;
+    cursor: pointer;
+    color: #273469;  
+    font-family: inherit;
   }
 
   .btn-group button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
+    border-right: none;
   }
 `;

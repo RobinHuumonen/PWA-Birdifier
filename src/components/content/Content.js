@@ -8,7 +8,7 @@ function Content() {
       </div>
       <div className="selectImage">
       </div>
-      <div class="btn-group">
+      <div className="btn-group">
         <button>Select file</button>
         <button>Take photo</button>
         <button>Classify</button>
