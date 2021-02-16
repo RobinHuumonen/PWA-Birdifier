@@ -15,7 +15,7 @@ export const ContentWrap = styled.div`
     width: 40rem;
     margin:0 auto;
   }
-  
+
   .selectImage {
     display: flex;
   }
@@ -38,6 +38,9 @@ export const ContentWrap = styled.div`
     cursor: pointer;
     color: #FAFAFF;  
     font-family: inherit;
+    @media(max-width: 350px) {
+      padding: 10px 10px;
+    }
   }
 
   .btn-group button:not(:last-child) {

@@ -14,7 +14,7 @@ function Content() {
   const classify = () => {
     setTimeout(() => {
       setRenderResults(true);
-    }, 4000);
+    }, 2000);
   };
 
   return (
