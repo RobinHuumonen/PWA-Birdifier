@@ -16,11 +16,11 @@ export const ContentWrap = styled.div`
     margin:0 auto;
   }
 
-  .selectImage {
+  .currentImage {
     display: flex;
   }
 
-  .selectImage img {
+  .currentImage img {
     height: auto;
     width: 100%;
     align-self: flex-end;
@@ -32,12 +32,8 @@ export const ContentWrap = styled.div`
 
   .btn-group button {
     width: 33.3%;
-    background-color: #8884d8;
     border: 1px solid #FAFAFF;
-    padding: 15px 24px;
-    cursor: pointer;
-    color: #FAFAFF;  
-    font-family: inherit;
+    padding: 15px 24px; 
     @media(max-width: 350px) {
       padding: 10px 10px;
     }
@@ -45,5 +41,12 @@ export const ContentWrap = styled.div`
 
   .btn-group button:not(:last-child) {
     border-right: none;
+  }
+
+  button, input > button {
+    background-color: #8884d8;
+    cursor: pointer;
+    color: #FAFAFF;
+    font-family: inherit;
   }
 `;

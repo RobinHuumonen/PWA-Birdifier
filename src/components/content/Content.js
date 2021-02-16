@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ContentWrap } from './ContentStyles';
 import preloadedImg from '../resources/bald-eagle-preloaded.jpg';
 import Results from './Results';
+import SelectImage from './SelectImage';
 
 function Content() {
   const [classifications, setClassifications] = useState([
@@ -10,23 +11,38 @@ function Content() {
     { name:  'Turkey Vulture', value: 3 },
   ]);
   const [renderResults, setRenderResults] = useState(false);
+  const [selectImage, setSelectImage] = useState(false);
+  const [img, setImg] = useState(preloadedImg);
+
+  console.log(preloadedImg);
 
   const classify = () => {
-    setTimeout(() => {
-      setRenderResults(true);
-    }, 2000);
+    if (selectImage === false) {
+      setTimeout(() => {
+        setRenderResults(true);
+      }, 2000);
+    }
   };
+
+  const selectImageOnClick = () => {
+    if (renderResults) {
+      setRenderResults(false);
+    }
+    return setSelectImage(true);
+  }
 
   return (
     <ContentWrap>
       {renderResults === true ?
         <Results classifications={classifications}/>
       : null}
-      <div className="selectImage">
-       <img src={preloadedImg}></img>
-      </div>
+      {selectImage === true ?
+        <SelectImage setSelectImage={setSelectImage} setImg={setImg}/>
+      : <div className="currentImage">
+          <img src={img}></img>
+        </div>}
       <div className="btn-group">
-        <button>Select file</button>
+        <button onClick={() => selectImageOnClick()}>Select file</button>
         <button onClick={() => setRenderResults(false)}>Take photo</button>
         <button onClick={() => classify()}>Classify</button>
       </div>
