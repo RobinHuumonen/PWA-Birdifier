@@ -35,8 +35,9 @@ function SelectImage(props) {
   };
 
   return (
-    <div style={{  }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Cropper
+        style={{ alignSelf: 'flex-end', width: "100%" }}
         initialAspectRatio={1}
         src={image}
         viewMode={1}
@@ -44,6 +45,7 @@ function SelectImage(props) {
         minCropBoxHeight={10}
         minCropBoxWidth={10}
         responsive={true}
+        background={false}
         autoCropArea={1}
         checkOrientation={false}
         onInitialized={(instance) => {
