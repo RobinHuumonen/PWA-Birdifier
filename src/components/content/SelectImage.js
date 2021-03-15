@@ -29,7 +29,7 @@ function SelectImage(props) {
     if (image === '/static/media/bald-eagle-preloaded-with-text.6e8412b5.jpg') {
       alert("Preloaded image cannot be cropped");
     } else if (typeof cropper !== "undefined") {
-      props.setImg(cropper.getCroppedCanvas().toDataURL());
+      props.setImgSrc(cropper.getCroppedCanvas().toDataURL());
       props.setSelectImage(false);
     }
   };
