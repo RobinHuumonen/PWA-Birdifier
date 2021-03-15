@@ -3,6 +3,7 @@ import { ContentWrap } from './ContentStyles';
 import preloadedImg from '../resources/bald-eagle-preloaded.jpg';
 import Results from './Results';
 import SelectImage from './SelectImage';
+//import * as tf from '@tensorlowjs/tfjs';
 
 function Content() {
   const [classifications, setClassifications] = useState([
@@ -13,15 +14,19 @@ function Content() {
   const [renderResults, setRenderResults] = useState(false);
   const [selectImage, setSelectImage] = useState(false);
   const [img, setImg] = useState(preloadedImg);
-
-  console.log(preloadedImg);
+  const modelDir = '/tfjs_files/model.json';
 
   const classify = () => {
+    const pixelHeight = 224, pixelWidth = 224;
+
     if (selectImage === false) {
       setTimeout(() => {
         setRenderResults(true);
       }, 2000);
     }
+
+    
+
   };
 
   const selectImageOnClick = () => {
