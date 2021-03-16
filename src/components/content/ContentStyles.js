@@ -23,6 +23,7 @@ export const ContentWrap = styled.div`
   .currentImage img {
     height: auto;
     width: 100%;
+    max-height: 450px;
     align-self: flex-end;
   }
 

@@ -84,7 +84,7 @@ function Content() {
   }
 
   const classify = async() => {
-    if (selectImage === false) {
+    if (selectImage === false && model) {
       const image = new Image();
       image.src = imgSrc;
       const img = tf.browser.fromPixels(image);

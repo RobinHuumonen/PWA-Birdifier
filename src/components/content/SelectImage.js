@@ -35,7 +35,7 @@ function SelectImage(props) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Cropper
-        style={{ alignSelf: 'flex-end', width: "100%"}}
+        style={{ alignSelf: 'flex-end', width: "100%", maxHeight: '450px'}}
         initialAspectRatio={1}
         src={image}
         viewMode={1}
