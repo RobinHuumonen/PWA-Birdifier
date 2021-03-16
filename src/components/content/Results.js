@@ -1,68 +1,37 @@
 
 import React  from 'react';
-import { PieChart, Pie, Tooltip, Label } from 'recharts';
+import { ContentWrap } from './ResultsStyles';
 
 function Results({ classifications }) {
-  const resultStyle = {
-    backgroundColor: '#273469',   
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection:' column',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  };
-
-  const h2Style = {
-    alignSelf: 'center',
-    color: '#FAFAFF',
-  };
-  
+  console.log(classifications[0].name);
   return (
-    <div style={resultStyle}>
-      <PieChart width={400} height={400} onClick={() => {}}>
-      <Pie
-      dataKey="value"
-      isAnimationActive={true}
-      data={classifications}
-      cx={200}
-      cy={200}
-      outerRadius={65}
-      fill="#8884d8"
-      label={({
-          cx,
-          cy,
-          midAngle,
-          innerRadius,
-          outerRadius,
-          value,
-          index
-        }) => {
-          const RADIAN = Math.PI / 180;
-          // eslint-disable-next-line
-          const radius = 25 + innerRadius + (outerRadius - innerRadius);
-          // eslint-disable-next-line
-          const x = cx + radius * Math.cos(-midAngle * RADIAN);
-          // eslint-disable-next-line
-          const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-          return (
-            <text
-              x={x}
-              y={y}
-              fill="#8884d8"
-              textAnchor={x > cx ? "start" : "end"}
-              dominantBaseline="central"
-            >
-              {classifications[index].name} ({value})
-            </text>
-          );
-        }}
-      />
-      <Label value="Detection confidence / %" offset={0} position="insideBottom" />
-      <Tooltip />
-      </PieChart>
-      <h2 style={h2Style}>Detection confidence / %</h2>
-    </div>
+    <ContentWrap>
+      <div>
+      <h2>Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Species</th>
+            <th>Detection Confidence / %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{classifications[0].name}</td>
+            <td>{Math.round((classifications[0].value + Number.EPSILON) * 100) / 100}</td>
+          </tr>
+          <tr>
+            <td>{classifications[1].name}</td>
+            <td>{Math.round((classifications[1].value + Number.EPSILON) * 100) / 100}</td>
+          </tr>
+          <tr>
+            <td>{classifications[2].name}</td>
+            <td>{Math.round((classifications[2].value + Number.EPSILON) * 100) / 100}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </ContentWrap>
   )
 };
 
