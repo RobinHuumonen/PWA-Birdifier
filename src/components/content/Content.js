@@ -20,11 +20,26 @@ function Content() {
   const pixelHeight = 224, pixelWidth = 224;
   const classesSpecies = Object.keys(classes);
 
-  useEffect(() => {
-    async function loadModel() {
-      setModel(await tf.loadLayersModel(modelDir));
+  async function saveModel(model) {
+    if (model) {
+      await model.save('indexeddb://my-model');
     }
-    loadModel()
+  }
+
+  async function loadModel() {
+    try {
+      setModel(await tf.loadLayersModel('indexeddb://my-model'));
+    } catch (error) {
+    } finally {
+      setModel(await tf.loadLayersModel(modelDir));
+      if (window.indexedDB ) {
+        saveModel(model)
+      }
+    }
+  }
+
+  useEffect(() => {
+    loadModel();
   }, []);
 
   function rescaleImage(image) {
