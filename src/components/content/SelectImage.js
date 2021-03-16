@@ -2,12 +2,10 @@ import React, { useState, useRef } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import preloadedImg from '../resources/bald-eagle-preloaded-with-text.jpg';
-import { ContentWrap } from './ContentStyles';
 
 function SelectImage(props) {
   const [image, setImage] = useState(preloadedImg);
   const [cropper, setCropper] = useState();
-
   const fileInput = useRef(null);
 
   const onChange = (e) => {
@@ -37,7 +35,7 @@ function SelectImage(props) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Cropper
-        style={{ alignSelf: 'flex-end', width: "100%" }}
+        style={{ alignSelf: 'flex-end', width: "100%"}}
         initialAspectRatio={1}
         src={image}
         viewMode={1}

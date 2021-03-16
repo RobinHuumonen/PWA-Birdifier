@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import { ContentWrap } from './ContentStyles';
-import preloadedImgSrc from '../resources/bald-eagle-preloaded.jpg';
+import preloadedImgSrc from '../resources/bald-eagle-preloaded-v2.jpg';
 import Results from './Results';
 import SelectImage from './SelectImage';
 import { classes } from '../resources/classes'
-
 
 function Content() {
   const [classifications, setClassifications] = useState([
@@ -28,8 +27,8 @@ function Content() {
     loadModel()
   }, []);
 
-  function batchImage(image) {
-    return tf.tidy(() => image.expandDims(0).toFloat().div(127).sub(1));
+  function rescaleImage(image) {
+    return image.expandDims(0).toFloat().div(127).sub(1);
   }
 
   function resizeImage(image) {
@@ -37,7 +36,6 @@ function Content() {
   }
 
   function setThreeBestPredictions(probabilities) {
-
     const mapProbabilitiesToSpecies = [];
     for (let i = 0; i < probabilities.length; i++) {
       mapProbabilitiesToSpecies.push({
@@ -45,14 +43,14 @@ function Content() {
         prediction: probabilities[i]
       })
     };
-
+    
     const highest = probabilities.indexOf(Math.max(...probabilities));
     probabilities[highest] = 0;
     const secondHighest = probabilities.indexOf(Math.max(...probabilities));
     probabilities[secondHighest] = 0;
     const thirdHighest = probabilities.indexOf(Math.max(...probabilities));
-
-    setClassifications([
+    
+    const newClassifications = [
       {
         name: mapProbabilitiesToSpecies[highest].species,
         value: mapProbabilitiesToSpecies[highest].prediction * 100
@@ -65,28 +63,22 @@ function Content() {
         name: mapProbabilitiesToSpecies[thirdHighest].species,
         value: mapProbabilitiesToSpecies[thirdHighest].prediction * 100
       },
-
-    ]);
-
-    console.log(classifications);
+    ];
+    console.log(newClassifications);
+    setClassifications(newClassifications);
   }
 
-  const classify = async () => {
-    const image = new Image();
-    image.src = imgSrc;
-
-    const img = tf.tidy(() => tf.browser.fromPixels(image));
-    const resizedImage = resizeImage(img);
-    const batchedImage = batchImage(resizedImage);
-
-    const logits = model.predict(batchedImage);
-    const probabilities = await logits.data();
-    setThreeBestPredictions(probabilities);
-
+  const classify = async() => {
     if (selectImage === false) {
-      setTimeout(() => {
-        setRenderResults(true);
-      }, 2000);
+      const image = new Image();
+      image.src = imgSrc;
+      const img = tf.browser.fromPixels(image);
+      const resizedImage = resizeImage(img);
+      const batchedImage = rescaleImage(resizedImage);
+      const predict = model.predict(batchedImage);
+      const probabilities = await predict.data();
+      setThreeBestPredictions(probabilities);
+      setRenderResults(true);
     }
   };
 
