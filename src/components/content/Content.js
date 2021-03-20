@@ -5,6 +5,7 @@ import preloadedImgSrc from '../resources/bald-eagle-preloaded-v2.jpg';
 import Results from './Results';
 import SelectImage from './SelectImage';
 import { classes } from '../resources/classes'
+import Orbitals from '@bit/joshk.react-spinners-css.orbitals';
 
 function Content() {
   const [classifications, setClassifications] = useState([
@@ -13,6 +14,7 @@ function Content() {
     { name:  'Turkey Vulture', value: 3 },
   ]);
   const [renderResults, setRenderResults] = useState(false);
+  const [renderSpinner, setRenderSpinner] = useState(false);
   const [selectImage, setSelectImage] = useState(false);
   const [imgSrc, setImgSrc] = useState(preloadedImgSrc);
   const [model, setModel] = useState(null);
@@ -84,6 +86,7 @@ function Content() {
 
   const classify = async() => {
     if (selectImage === false && model) {
+      setRenderSpinner(true);
       const image = new Image();
       image.src = imgSrc;
       try {
@@ -93,8 +96,10 @@ function Content() {
         const predict = model.predict(batchedImage);
         const probabilities = await predict.data();
         setThreeBestPredictions(probabilities);
+        setRenderSpinner(false);
         setRenderResults(true);
       } catch (e) {
+        setRenderSpinner(false);
         alert("Something went wrong with classification. Try again!")
       }
     }
@@ -107,10 +112,18 @@ function Content() {
     return setSelectImage(true);
   }
 
+  const OrbitalsStyle = {
+    margin: 'auto',
+    width: '50%',
+  };
+
   return (
     <ContentWrap>
       {renderResults === true ?
         <Results classifications={classifications} setRenderResults={setRenderResults}/>
+      : null}
+      {renderSpinner === true ?
+        <Orbitals color="#8884d8" style={OrbitalsStyle}/>
       : null}
       {selectImage === true ?
         <SelectImage setSelectImage={setSelectImage} setImgSrc={setImgSrc}/>
