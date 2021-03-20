@@ -26,7 +26,8 @@ export const ContentWrap = styled.div`
     max-height: 350px;
     width: auto;
     align-self: flex-end;
-    border-top: 1px solid #273469;
+    border: 1px solid #273469;
+    border-bottom: none;
   }
 
   .btn-group {

@@ -7,7 +7,7 @@ export const PageWrap = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   min-height:100vh;
-  max-width: 100%;
+  min-width: 100vw;
   overflow-x: hidden;
 
   color: #273469; 
