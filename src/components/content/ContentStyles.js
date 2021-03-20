@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 export const ContentWrap = styled.div`
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
   min-height: 100%;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  margin: auto;
 
   div {
     flex: 1;
@@ -24,8 +23,9 @@ export const ContentWrap = styled.div`
 
   .currentImage img {
     height: auto;
-    width: 100%;
-    max-height: 450px;
+    min-width: 100%;
+    max-height: 350px;
+    width: auto;
     align-self: flex-end;
   }
 

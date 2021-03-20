@@ -3,7 +3,6 @@ import React  from 'react';
 import { ContentWrap } from './ResultsStyles';
 
 function Results({ classifications }) {
-  console.log(classifications[0].name);
   return (
     <ContentWrap>
       <div>

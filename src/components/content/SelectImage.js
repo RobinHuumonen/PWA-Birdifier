@@ -20,7 +20,11 @@ function SelectImage(props) {
     reader.onload = () => {
       setImage(reader.result);
     };
-    reader.readAsDataURL(files[0]);
+    try {
+      reader.readAsDataURL(files[0]);
+    } catch (err) {
+      alert("Something went wrong with cropping. Try again!");
+    }
   };
 
   const getCropData = () => {
@@ -35,7 +39,7 @@ function SelectImage(props) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column'}}>
       <Cropper
-        style={{ alignSelf: 'flex-end', width: "100%", maxHeight: '450px'}}
+        style={{ alignSelf: 'flex-end', minWidth: "100%", maxHeight: '350px', width: "auto", height: "auto"}}
         initialAspectRatio={1}
         src={image}
         viewMode={1}

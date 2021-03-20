@@ -9,7 +9,7 @@ export const ContentWrap = styled.div`
   text-align: center;
   align-items: center;
   margin: 0;
-  padding: 0;
+  padding: 40px 0;
 
   th, td, h2 {
     color: #FAFAFF;

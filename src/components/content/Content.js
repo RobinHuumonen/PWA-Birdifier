@@ -79,7 +79,6 @@ function Content() {
         value: mapProbabilitiesToSpecies[thirdHighest].prediction * 100
       },
     ];
-    console.log(newClassifications);
     setClassifications(newClassifications);
   }
 
@@ -87,13 +86,17 @@ function Content() {
     if (selectImage === false && model) {
       const image = new Image();
       image.src = imgSrc;
-      const img = tf.browser.fromPixels(image);
-      const resizedImage = resizeImage(img);
-      const batchedImage = rescaleImage(resizedImage);
-      const predict = model.predict(batchedImage);
-      const probabilities = await predict.data();
-      setThreeBestPredictions(probabilities);
-      setRenderResults(true);
+      try {
+        const img = tf.browser.fromPixels(image);
+        const resizedImage = resizeImage(img);
+        const batchedImage = rescaleImage(resizedImage);
+        const predict = model.predict(batchedImage);
+        const probabilities = await predict.data();
+        setThreeBestPredictions(probabilities);
+        setRenderResults(true);
+      } catch (e) {
+        alert("Something went wrong with classification. Try again!")
+      }
     }
   };
 
@@ -115,8 +118,8 @@ function Content() {
           <img src={imgSrc}></img>
         </div>}
       <div className="btn-group">
-        <button onClick={() => selectImageOnClick()}>Select file</button>
-        <button onClick={() => setRenderResults(false)}>Take photo</button>
+        <button onClick={() => selectImageOnClick()}>Select File</button>
+        <button onClick={() => setRenderResults(false)}>Take Photo</button>
         <button onClick={() => classify()}>Classify</button>
       </div>
     </ContentWrap>
