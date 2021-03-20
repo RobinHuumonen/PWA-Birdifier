@@ -110,7 +110,7 @@ function Content() {
   return (
     <ContentWrap>
       {renderResults === true ?
-        <Results classifications={classifications}/>
+        <Results classifications={classifications} setRenderResults={setRenderResults}/>
       : null}
       {selectImage === true ?
         <SelectImage setSelectImage={setSelectImage} setImgSrc={setImgSrc}/>

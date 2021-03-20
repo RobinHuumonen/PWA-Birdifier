@@ -9,10 +9,14 @@ export const ContentWrap = styled.div`
   text-align: center;
   align-items: center;
   margin: 0;
-  padding: 40px 0;
+  
 
   th, td, h2 {
     color: #FAFAFF;
+  }
+  
+  table {
+    padding-bottom: 20px;
   }
 
   h2 {
@@ -21,6 +25,15 @@ export const ContentWrap = styled.div`
 
   th, td {
     font-size: 1.2rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 15px 24px; 
+  }
+
+  .closeBtn {
+    width: 100%;
   }
 
 `;

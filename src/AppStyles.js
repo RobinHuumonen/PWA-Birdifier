@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const PageWrap = styled.div`
 	font-size: 10px;   /*1rem = 10px*/
   /* background-color: #FAFAFF; */
-  background-image: url("components/resources/pexels-efdal-yildiz-917494.jpg");
-  /* background-repeat: no-repeat; */
+  background-image: url('pexels-roberto-shumski-1903702.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
   min-height:100vh;
   max-width: 100%;
   overflow-x: hidden;

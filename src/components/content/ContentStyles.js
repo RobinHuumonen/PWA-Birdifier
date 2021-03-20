@@ -4,10 +4,9 @@ export const ContentWrap = styled.div`
   /* flex: 1; */
   display: flex;
   flex-direction: column;
-  min-height: 100%;
   width: 100%;
   margin: auto;
-
+  
   div {
     flex: 1;
   }
@@ -27,6 +26,7 @@ export const ContentWrap = styled.div`
     max-height: 350px;
     width: auto;
     align-self: flex-end;
+    border-top: 1px solid #273469;
   }
 
   .btn-group {
@@ -35,7 +35,7 @@ export const ContentWrap = styled.div`
 
   .btn-group button {
     width: 33.3%;
-    border: 1px solid #FAFAFF;
+    border: 1px solid #273469;
     padding: 15px 24px; 
     @media(max-width: 350px) {
       padding: 10px 10px;
