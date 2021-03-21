@@ -6,8 +6,8 @@ import Results from './Results';
 import SelectImage from './SelectImage';
 import { classes } from '../resources/classes'
 import Orbitals from '@bit/joshk.react-spinners-css.orbitals';
-/* import { Camera } from "react-camera-pro"; */
-import { Camera } from "../../Camera";
+import { Camera } from "react-camera-pro";
+/* import { Camera } from "../../Camera"; */
 
 function Content() {
   const camera = useRef(null);
