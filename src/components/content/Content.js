@@ -144,7 +144,7 @@ function Content() {
       </div>}
       {selectImage === false ? 
         <div className="btn-group">
-            <button onClick={() => selectImageOnClick()}>Select File and/or Crop</button>
+            <button onClick={() => selectImageOnClick()}>Select and/or Crop</button>
             <button onClick={() => {  setRenderResults(false); setImgSrc(camera.current.takePhoto()) } }>Take Photo</button>
             <button onClick={() => classify()}>Classify</button>
         </div>
