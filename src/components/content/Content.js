@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import { ContentWrap } from './ContentStyles';
 import preloadedImgSrc from '../resources/bald-eagle-preloaded-v2.jpg';
@@ -6,8 +6,11 @@ import Results from './Results';
 import SelectImage from './SelectImage';
 import { classes } from '../resources/classes'
 import Orbitals from '@bit/joshk.react-spinners-css.orbitals';
+/* import { Camera } from "react-camera-pro"; */
+import { Camera } from "../../Camera";
 
 function Content() {
+  const camera = useRef(null);
   const [classifications, setClassifications] = useState([
     { name:  'Bald Eagle', value: 90 },
     { name:  'Golden Eagle', value: 7 },
@@ -119,6 +122,15 @@ function Content() {
 
   return (
     <ContentWrap>
+    <Camera
+      ref={camera}
+      errorMessages={{
+        noCameraAccessible: 'No camera device accessible. Please connect your camera or try a different browser.',
+        permissionDenied: 'Permission denied. Please refresh and give camera permission.',
+        switchCamera:
+          'It is not possible to switch camera to different one because there is only one video device accessible.',
+        canvas: 'Canvas is not supported.',
+      }}/>
       {renderResults === true ?
         <Results classifications={classifications} setRenderResults={setRenderResults}/>
       : null}
@@ -126,15 +138,17 @@ function Content() {
         <Orbitals color="#8884d8" style={OrbitalsStyle}/>
       : null}
       {selectImage === true ?
-        <SelectImage setSelectImage={setSelectImage} setImgSrc={setImgSrc}/>
+        <SelectImage setSelectImage={setSelectImage} imgSrc={imgSrc} setImgSrc={setImgSrc}/>
       : <div className="currentImage">
           <img src={imgSrc}></img>
-        </div>}
-      <div className="btn-group">
-        <button onClick={() => selectImageOnClick()}>Select File</button>
-        <button onClick={() => setRenderResults(false)}>Take Photo</button>
-        <button onClick={() => classify()}>Classify</button>
-      </div>
+      </div>}
+      {selectImage === false ? 
+        <div className="btn-group">
+            <button onClick={() => selectImageOnClick()}>Select File and/or Crop</button>
+            <button onClick={() => {  setRenderResults(false); setImgSrc(camera.current.takePhoto()) } }>Take Photo</button>
+            <button onClick={() => classify()}>Classify</button>
+        </div>
+      : null}
     </ContentWrap>
   );
 }

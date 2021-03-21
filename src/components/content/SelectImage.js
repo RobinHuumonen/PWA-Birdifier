@@ -4,7 +4,7 @@ import "cropperjs/dist/cropper.css";
 import preloadedImg from '../resources/bald-eagle-preloaded-with-text.jpg';
 
 function SelectImage(props) {
-  const [image, setImage] = useState(preloadedImg);
+  const [image, setImage] = useState(props.imgSrc);
   const [cropper, setCropper] = useState();
   const fileInput = useRef(null);
 
@@ -28,9 +28,7 @@ function SelectImage(props) {
   };
 
   const getCropData = () => {
-    if (image === '/static/media/bald-eagle-preloaded-with-text.6e8412b5.jpg') {
-      alert("Preloaded image cannot be cropped");
-    } else if (typeof cropper !== "undefined") {
+    if (typeof cropper !== "undefined") {
       props.setImgSrc(cropper.getCroppedCanvas().toDataURL());
       props.setSelectImage(false);
     }
