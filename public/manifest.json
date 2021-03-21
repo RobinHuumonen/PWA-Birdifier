@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "PWA Birdifier",
+  "name": "PWA Birdifier",
   "icons": [
     {
       "src": "favicon.ico",
