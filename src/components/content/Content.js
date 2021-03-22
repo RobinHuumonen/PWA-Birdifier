@@ -161,7 +161,7 @@ function Content() {
         <div>
           <div className="btn-group">
               <button onClick={() => cropOnClick()}>Crop</button>
-              <button onClick={() => fileInput.current.click()}>Select</button>
+              <button onClick={() => { if (renderResults) setRenderResults(false); fileInput.current.click() } }>Select</button>
               <button onClick={() => classify()}>Classify</button>
           </div>
           <input style={{ display: 'none' }} ref={fileInput} type="file" onChange={fileInputOnChange} accept="image/*" />
