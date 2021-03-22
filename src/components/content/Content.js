@@ -91,7 +91,7 @@ function Content() {
   }
 
   const classify = async() => {
-    if (cropImage === false && model) {
+    if (model) {
       setRenderSpinner(true);
       const image = new Image();
       image.src = imgSrc;
@@ -109,6 +109,8 @@ function Content() {
         console.log(e);
         alert("Something went wrong with classification. Try again!");
       }
+    } else {
+      alert("No model available. Check connection");
     }
   };
 
