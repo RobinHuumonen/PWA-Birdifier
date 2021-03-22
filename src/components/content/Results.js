@@ -28,7 +28,7 @@ function Results({ classifications, setRenderResults }) {
             </tr>
           </tbody>
         </table>
-        <div class="closeBtn">
+        <div className="closeBtn">
           <button onClick={() => setRenderResults(false)}>Close</button>
         </div>
     </ContentWrap>

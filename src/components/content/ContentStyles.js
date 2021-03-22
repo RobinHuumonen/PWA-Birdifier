@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const ContentWrap = styled.div`
-  /* flex: 1; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -30,7 +29,7 @@ export const ContentWrap = styled.div`
     border-bottom: none;
   }
 
-  .btn-group {
+  .btn-group, .btn-group-2 {
     flex-grow: 0;
   }
 
@@ -43,7 +42,16 @@ export const ContentWrap = styled.div`
     }
   }
 
-  .btn-group button:not(:last-child) {
+  .btn-group-2 button {
+    width: 50%;
+    border: 1px solid #273469;
+    padding: 15px 24px; 
+    @media(max-width: 350px) {
+      padding: 10px 10px;
+    }
+  }
+
+  .btn-group, .btn-group-2 button:not(:last-child) {
     border-right: none;
   }
 

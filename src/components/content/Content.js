@@ -3,14 +3,12 @@ import * as tf from '@tensorflow/tfjs';
 import { ContentWrap } from './ContentStyles';
 import preloadedImgSrc from '../resources/bald-eagle-preloaded-v2.jpg';
 import Results from './Results';
-import SelectImage from './SelectImage';
+import CropImage from './CropImage';
 import { classes } from '../resources/classes'
 import Orbitals from '@bit/joshk.react-spinners-css.orbitals';
-import { Camera } from "react-camera-pro";
-/* import { Camera } from "../../Camera"; */
 
 function Content() {
-  const camera = useRef(null);
+  const fileInput = useRef(null);
   const [classifications, setClassifications] = useState([
     { name:  'Bald Eagle', value: 90 },
     { name:  'Golden Eagle', value: 7 },
@@ -18,7 +16,7 @@ function Content() {
   ]);
   const [renderResults, setRenderResults] = useState(false);
   const [renderSpinner, setRenderSpinner] = useState(false);
-  const [selectImage, setSelectImage] = useState(false);
+  const [cropImage, setCropImage] = useState(false);
   const [imgSrc, setImgSrc] = useState(preloadedImgSrc);
   const [model, setModel] = useState(null);
   const modelDir = '/tfjs_files/model.json';
@@ -46,6 +44,11 @@ function Content() {
   useEffect(() => {
     loadModel();
   }, []);
+
+  const OrbitalsStyle = {
+    margin: 'auto',
+    width: '50%',
+  };
 
   function rescaleImage(image) {
     return image.expandDims(0).toFloat().div(127).sub(1);
@@ -88,7 +91,7 @@ function Content() {
   }
 
   const classify = async() => {
-    if (selectImage === false && model) {
+    if (cropImage === false && model) {
       setRenderSpinner(true);
       const image = new Image();
       image.src = imgSrc;
@@ -103,50 +106,63 @@ function Content() {
         setRenderResults(true);
       } catch (e) {
         setRenderSpinner(false);
-        alert("Something went wrong with classification. Try again!")
+        console.log(e);
+        alert("Something went wrong with classification. Try again!");
       }
     }
   };
 
-  const selectImageOnClick = () => {
+  const cropOnClick = () => {
     if (renderResults) {
       setRenderResults(false);
     }
-    return setSelectImage(true);
+    return setCropImage(true);
   }
 
-  const OrbitalsStyle = {
-    margin: 'auto',
-    width: '50%',
+  const fileInputOnChange = (e) => {
+    e.preventDefault();
+    let files;
+
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImgSrc(reader.result);
+    };
+
+    try {
+      reader.readAsDataURL(files[0]);
+    } catch (err) {
+      console.log(err);
+      alert("Something went wrong with image selection. Try again!");
+    }
   };
 
   return (
     <ContentWrap>
-    <Camera
-      ref={camera}
-      errorMessages={{
-        noCameraAccessible: 'No camera device accessible. Please connect your camera or try a different browser.',
-        permissionDenied: 'Permission denied. Please refresh and give camera permission.',
-        switchCamera:
-          'It is not possible to switch camera to different one because there is only one video device accessible.',
-        canvas: 'Canvas is not supported.',
-      }}/>
       {renderResults === true ?
         <Results classifications={classifications} setRenderResults={setRenderResults}/>
       : null}
       {renderSpinner === true ?
         <Orbitals color="#8884d8" style={OrbitalsStyle}/>
       : null}
-      {selectImage === true ?
-        <SelectImage setSelectImage={setSelectImage} imgSrc={imgSrc} setImgSrc={setImgSrc}/>
+      {cropImage === true ?
+        <CropImage setCropImage={setCropImage} imgSrc={imgSrc} setImgSrc={setImgSrc}/>
       : <div className="currentImage">
           <img src={imgSrc}></img>
       </div>}
-      {selectImage === false ? 
-        <div className="btn-group">
-            <button onClick={() => selectImageOnClick()}>Select and/or Crop</button>
-            <button onClick={() => {  setRenderResults(false); setImgSrc(camera.current.takePhoto()) } }>Take Photo</button>
-            <button onClick={() => classify()}>Classify</button>
+      {cropImage === false ?
+        <div>
+          <div className="btn-group">
+              <button onClick={() => cropOnClick()}>Crop</button>
+              <button onClick={() => fileInput.current.click()}>Select</button>
+              <button onClick={() => classify()}>Classify</button>
+          </div>
+          <input style={{ display: 'none' }} ref={fileInput} type="file" onChange={fileInputOnChange} accept="image/*" />
         </div>
       : null}
     </ContentWrap>

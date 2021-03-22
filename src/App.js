@@ -17,8 +17,3 @@ function App() {
 }
 
 export default App;
-
-{/* <PageWrap>
-<Header/>
-<Content/>
-</PageWrap> */}
