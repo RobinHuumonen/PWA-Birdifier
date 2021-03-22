@@ -34,6 +34,8 @@ function SelectImage(props) {
     }
   };
 
+  console.log(fileInput.current);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column'}}>
       <Cropper
