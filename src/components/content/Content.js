@@ -53,7 +53,7 @@ function Content() {
   function rescaleImage(image) {
     return image.expandDims(0).toFloat().div(127).sub(1);
   }
-  
+
   function setThreeBestPredictions(probabilities) {
     const mapProbabilitiesToSpecies = [];
     for (let i = 0; i < probabilities.length; i++) {
@@ -91,8 +91,10 @@ function Content() {
       setRenderSpinner(true);
       const image = new Image(pixelHeight, pixelWidth);
       image.src = imgSrc;
+      console.log("image", image);
       try {
         const img = tf.browser.fromPixels(image);
+        console.log("img", img);
         const batchedImage = rescaleImage(img);
         const predict = model.predict(batchedImage);
         const probabilities = await predict.data();
