@@ -27,7 +27,7 @@ function Content() {
     if (model) {
       await model.save('indexeddb://my-model');
     }
-  }
+  };
 
   async function loadModel() {
     try {
@@ -36,10 +36,10 @@ function Content() {
     } finally {
       setModel(await tf.loadLayersModel(modelDir));
       if (window.indexedDB ) {
-        saveModel(model)
+        saveModel(model);
       }
     }
-  }
+  };
 
   useEffect(() => {
     loadModel();
@@ -162,7 +162,10 @@ function Content() {
           <div className="btn-group">
               <button onClick={() => cropOnClick()}>Crop</button>
               <button onClick={() => { if (renderResults) setRenderResults(false); fileInput.current.click() } }>Select</button>
-              <button onClick={() => classify()}>Classify</button>
+              {model === null ? 
+                <button onClick={() => alert("No model available. Check connection")}>No Model</button>
+              : <button onClick={() => classify()}>Classify</button>
+              }
           </div>
           <input style={{ display: 'none' }} ref={fileInput} type="file" onChange={fileInputOnChange} accept="image/*" />
         </div>
