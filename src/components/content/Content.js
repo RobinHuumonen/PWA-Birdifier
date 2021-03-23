@@ -53,11 +53,7 @@ function Content() {
   function rescaleImage(image) {
     return image.expandDims(0).toFloat().div(127).sub(1);
   }
-
-  function resizeImage(image) {
-    return tf.image.resizeBilinear(image, [pixelHeight, pixelWidth]);
-  }
-
+  
   function setThreeBestPredictions(probabilities) {
     const mapProbabilitiesToSpecies = [];
     for (let i = 0; i < probabilities.length; i++) {
@@ -93,12 +89,10 @@ function Content() {
   const classify = async() => {
     if (model) {
       setRenderSpinner(true);
-      const image = new Image();
-      image.src = imgSrc;
+      const image = new Image(pixelHeight, pixelWidth);
       try {
         const img = tf.browser.fromPixels(image);
-        const resizedImage = resizeImage(img);
-        const batchedImage = rescaleImage(resizedImage);
+        const batchedImage = rescaleImage(img);
         const predict = model.predict(batchedImage);
         const probabilities = await predict.data();
         setThreeBestPredictions(probabilities);
