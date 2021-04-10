@@ -22,6 +22,7 @@ function Content() {
   const modelDir = '/tfjs_files/model.json';
   const pixelHeight = 224, pixelWidth = 224;
   const classesSpecies = Object.keys(classes);
+  const noModel = "No model available. Check connection or wait it to load";
 
   async function saveModel(model) {
     if (model) {
@@ -107,7 +108,7 @@ function Content() {
         alert("Something went wrong with classification. Try again!");
       }
     } else {
-      alert("No model available. Check connection");
+      alert(noModel);
     }
   };
 
@@ -160,7 +161,7 @@ function Content() {
               <button onClick={() => cropOnClick()}>Crop</button>
               <button onClick={() => { if (renderResults) setRenderResults(false); fileInput.current.click() } }>Select</button>
               {model === null ? 
-                <button onClick={() => alert("No model available. Check connection")}>No Model</button>
+                <button onClick={() => alert(noModel)}>No Model</button>
               : <button onClick={() => classify()}>Classify</button>
               }
           </div>
