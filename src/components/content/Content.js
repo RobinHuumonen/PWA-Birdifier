@@ -1,38 +1,38 @@
-import React, { useState, useEffect, useRef  } from 'react';
-import * as tf from '@tensorflow/tfjs';
-import { ContentWrap } from './ContentStyles';
-import preloadedImgSrc from '../resources/bald-eagle-preloaded-v3.jpg';
-import Results from './Results';
-import CropImage from './CropImage';
-import { classes } from '../resources/classes'
-import Orbitals from '@bit/joshk.react-spinners-css.orbitals';
+import React, { useState, useEffect, useRef  } from "react";
+import * as tf from "@tensorflow/tfjs";
+import { ContentWrap } from "./ContentStyles";
+import preloadedImgSrc from "../resources/bald-eagle-preloaded-v3.jpg";
+import Results from "./Results";
+import CropImage from "./CropImage";
+import { classes } from "../resources/classes";
+import Orbitals from "@bit/joshk.react-spinners-css.orbitals";
 
 function Content() {
   const fileInput = useRef(null);
   const [classifications, setClassifications] = useState([
-    { name:  'Bald Eagle', value: 90 },
-    { name:  'Golden Eagle', value: 7 },
-    { name:  'Turkey Vulture', value: 3 },
+    { name:  "Bald Eagle", value: 90 },
+    { name:  "Golden Eagle", value: 7 },
+    { name:  "Turkey Vulture", value: 3 },
   ]);
   const [renderResults, setRenderResults] = useState(false);
   const [renderSpinner, setRenderSpinner] = useState(false);
   const [cropImage, setCropImage] = useState(false);
   const [imgSrc, setImgSrc] = useState(preloadedImgSrc);
   const [model, setModel] = useState(null);
-  const modelDir = '/tfjs_files/model.json';
+  const modelDir = "/tfjs_files/model.json";
   const pixelHeight = 224, pixelWidth = 224;
   const classesSpecies = Object.keys(classes);
   const noModel = "No model available. Check connection or wait it to load";
 
   async function saveModel(model) {
     if (model) {
-      await model.save('indexeddb://my-model');
+      await model.save("indexeddb://my-model");
     }
-  };
+  }
 
   async function loadModel() {
     try {
-      setModel(await tf.loadLayersModel('indexeddb://my-model'));
+      setModel(await tf.loadLayersModel("indexeddb://my-model"));
     } catch (error) {
     } finally {
       setModel(await tf.loadLayersModel(modelDir));
@@ -40,15 +40,15 @@ function Content() {
         saveModel(model);
       }
     }
-  };
+  }
 
   useEffect(() => {
     loadModel();
   }, []);
 
   const OrbitalsStyle = {
-    margin: 'auto',
-    width: '50%',
+    margin: "auto",
+    width: "50%",
   };
 
   function rescaleImage(image) {
@@ -61,8 +61,8 @@ function Content() {
       mapProbabilitiesToSpecies.push({
         species: classesSpecies[i],
         prediction: probabilities[i]
-      })
-    };
+      });
+    }
     
     const highest = probabilities.indexOf(Math.max(...probabilities));
     probabilities[highest] = 0;
@@ -119,7 +119,7 @@ function Content() {
       setRenderResults(false);
     }
     return setCropImage(true);
-  }
+  };
 
   const fileInputOnChange = (e) => {
     e.preventDefault();
@@ -148,28 +148,28 @@ function Content() {
     <ContentWrap>
       {renderResults === true ?
         <Results classifications={classifications} setRenderResults={setRenderResults}/>
-      : null}
+        : null}
       {renderSpinner === true ?
         <Orbitals color="#8884d8" style={OrbitalsStyle}/>
-      : null}
+        : null}
       {cropImage === true ?
         <CropImage setCropImage={setCropImage} imgSrc={imgSrc} setImgSrc={setImgSrc}/>
-      : <div className="currentImage">
+        : <div className="currentImage">
           <img src={imgSrc}></img>
-      </div>}
+        </div>}
       {cropImage === false ?
         <div>
           <div className="btn-group">
-              <button onClick={() => cropOnClick()}>Crop</button>
-              <button onClick={() => { if (renderResults) setRenderResults(false); fileInput.current.click() } }>Select</button>
-              {model === null ? 
-                <button onClick={() => alert(noModel)}>No Model</button>
+            <button onClick={() => cropOnClick()}>Crop</button>
+            <button onClick={() => { if (renderResults) setRenderResults(false); fileInput.current.click(); } }>Select</button>
+            {model === null ? 
+              <button onClick={() => alert(noModel)}>No Model</button>
               : <button onClick={() => classify()}>Classify</button>
-              }
+            }
           </div>
-          <input style={{ display: 'none' }} ref={fileInput} type="file" onChange={fileInputOnChange} accept="image/*" />
+          <input style={{ display: "none" }} ref={fileInput} type="file" onChange={fileInputOnChange} accept="image/*" />
         </div>
-      : null}
+        : null}
     </ContentWrap>
   );
 }

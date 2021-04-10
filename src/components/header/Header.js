@@ -1,5 +1,5 @@
-import React from 'react';
-import { HeaderWrap } from './HeaderStyles';
+import React from "react";
+import { HeaderWrap } from "./HeaderStyles";
 
 function Header() {
 

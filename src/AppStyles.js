@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import backgroundSrc from './components/resources/pexels-roberto-shumski-1903702.jpg';
+import styled from "styled-components";
+import backgroundSrc from "./components/resources/pexels-roberto-shumski-1903702.jpg";
 
 export const PageWrap = styled.div`
   min-height:100vh;

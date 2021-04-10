@@ -14,9 +14,9 @@ function CropImage(props) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column'}}>
+    <div style={{ display: "flex", flexDirection: "column"}}>
       <Cropper
-        style={{ alignSelf: 'flex-end', minWidth: "100%", maxHeight: '350px', height: "auto"}}
+        style={{ alignSelf: "flex-end", minWidth: "100%", maxHeight: "350px", height: "auto"}}
         initialAspectRatio={1}
         src={image}
         viewMode={1}
@@ -28,7 +28,7 @@ function CropImage(props) {
         autoCropArea={1}
         checkOrientation={false}
         onInitialized={(instance) => {
-        setCropper(instance);
+          setCropper(instance);
         }}
       />
       <div id="crop" className="btn-group-2">
@@ -36,7 +36,7 @@ function CropImage(props) {
         <button onClick={() => getCropData()}>Crop</button>
       </div>
     </div>
-  )
+  );
   
 }
 
