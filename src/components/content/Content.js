@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef  } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import { ContentWrap } from './ContentStyles';
-import preloadedImgSrc from '../resources/bald-eagle-preloaded-v2.jpg';
+import preloadedImgSrc from '../resources/bald-eagle-preloaded-v3.jpg';
 import Results from './Results';
 import CropImage from './CropImage';
 import { classes } from '../resources/classes'
@@ -88,14 +88,16 @@ function Content() {
   }
 
   const classify = async() => {
+    if (imgSrc === preloadedImgSrc) {
+      alert("Crop preloaded image before classifying");
+      return;
+    }
     if (model) {
       setRenderSpinner(true);
       const image = new Image(pixelHeight, pixelWidth);
       image.src = imgSrc;
-      console.log("image", image);
       try {
         const img = tf.browser.fromPixels(image);
-        console.log("img", img);
         const batchedImage = rescaleImage(img);
         const predict = model.predict(batchedImage);
         const probabilities = await predict.data();
