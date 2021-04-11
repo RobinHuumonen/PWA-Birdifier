@@ -34,6 +34,7 @@ function Content() {
     try {
       setModel(await tf.loadLayersModel("indexeddb://my-model"));
     } catch (error) {
+      //
     } finally {
       setModel(await tf.loadLayersModel(modelDir));
       if (window.indexedDB ) {
