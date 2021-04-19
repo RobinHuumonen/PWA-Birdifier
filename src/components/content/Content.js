@@ -64,7 +64,10 @@ function Content() {
         prediction: probabilities[i]
       });
     }
-    
+
+    //console.log(mapProbabilitiesToSpecies[133].prediction*100);
+    //console.log(mapProbabilitiesToSpecies);
+
     const highest = probabilities.indexOf(Math.max(...probabilities));
     probabilities[highest] = 0;
     const secondHighest = probabilities.indexOf(Math.max(...probabilities));
